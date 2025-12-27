@@ -62,3 +62,9 @@ app.get("/attendance", async (req, res) => {
 app.listen(5000, () =>
   console.log("Backend running on port 5000")
 );
+
+app.use(cors({
+  origin: ["https://promptify.tech", "http://localhost:3000"], 
+  methods: ["GET","POST"],
+}));
+
