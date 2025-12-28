@@ -6,57 +6,46 @@ const Study = require("./models/Study");
 const Attendance = require("./models/Attendance");
 
 const app = express();
-app.use(cors());
+
+// CORS
+app.use(
+  cors({
+    origin: ["https://promptify.tech", "http://localhost:3000"],
+    methods: ["GET", "POST"],
+  })
+);
+
 app.use(express.json());
 
-// ------------------ DATABASE ------------------
+// DB
 mongoose
-  .connect(
-    "mongodb+srv://bhavesh:Bhavesh2662%40@cluster0.cw9cnqn.mongodb.net/studyapp"
-  )
-    .then(() => console.log("MongoDB Connected"))
+  .connect("mongodb+srv://bhavesh:Bhavesh2662%40@cluster0.cw9cnqn.mongodb.net/studyapp")
+  .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log("DB Error:", err));
-// ------------------ STUDY ------------------
+
+// Routes
 app.post("/study", async (req, res) => {
-  try {
-    const s = await Study.create(req.body);
-    res.json(s);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  const s = await Study.create(req.body);
+  res.json(s);
 });
 
 app.get("/study", async (req, res) => {
-  try {
-    const data = await Study.find();
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  const s = await Study.find();
+  res.json(s);
 });
 
-// ------------------ ATTENDANCE ------------------
 app.post("/attendance", async (req, res) => {
-  try {
-    const a = await Attendance.create(req.body);
-    res.json(a);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  const a = await Attendance.create(req.body);
+  res.json(a);
 });
 
 app.get("/attendance", async (req, res) => {
-  try {
-    const data = await Attendance.find();
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  const a = await Attendance.find();
+  res.json(a);
 });
 
-// ------------------ SERVER ------------------
-// IMPORTANT FOR RAILWAY / CUSTOM DOMAIN
+// Test
+app.get("/", (req, res) => res.send("API is running"));
+
 const PORT = process.env.PORT || 8080;
-
-app.listen(PORT, () => console.log("Backend running on port", PORT));
-
+app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
