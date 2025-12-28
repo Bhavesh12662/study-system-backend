@@ -13,11 +13,8 @@ app.use(express.json());
 mongoose
   .connect(
     "mongodb+srv://bhavesh:Bhavesh2662%40@cluster0.cw9cnqn.mongodb.net/studyapp",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
-  .then(() => console.log("MongoDB Connected"))
+    .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log("DB Error:", err));
-
 // ------------------ STUDY ------------------
 app.post("/study", async (req, res) => {
   try {
