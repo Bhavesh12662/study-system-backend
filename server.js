@@ -11,11 +11,15 @@ app.use(
   cors({
     origin: [
       "https://promptify.tech",
-      "https://study-system-frontend.vercel.app"
+      "https://study-system-frontend.vercel.app",
+      "https://study-system-backend-1.onrender.com",
+      "http://localhost:3000",
+      "http://127.0.0.1:5500"
     ],
-    methods: ["GET", "POST"],
+    methods: ["GET","POST"],
   })
 );
+
 
 // ------------ DATABASE ------------
 mongoose
