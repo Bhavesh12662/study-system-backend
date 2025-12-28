@@ -59,5 +59,6 @@ app.get("/attendance", async (req, res) => {
 // ------------------ SERVER ------------------
 // IMPORTANT FOR RAILWAY / CUSTOM DOMAIN
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => console.log("Backend running on port", PORT));
 
